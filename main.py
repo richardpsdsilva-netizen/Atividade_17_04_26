@@ -13,7 +13,7 @@ class Serie(Base):
     ano_lancamento = Column(Integer)
     produtora = Column(String,nullable=False)
 
-    episodios = relationship("Episodio", back_populates = "serie" , cascade = "all, delete-orphan")
+    episodios = relationship("Episodio", back_populates = "series" , cascade = "all, delete-orphan")
 
 class Episodios(Base):
     __tablename__ = "episodios"
@@ -23,6 +23,15 @@ class Episodios(Base):
     duracao_minutos = Column(Float)
     serie_id =  Column(Integer , ForeignKey ('serie.id'))
 
-    serie = relationship("Serie", back_populates= "episodios")
+serie = relationship("series", back_populates= "episodios")
+
+engine = create_engine("sqlite:///Entreterimento.db")
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+
+
+
 
 
