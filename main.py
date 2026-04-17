@@ -13,18 +13,16 @@ class Serie(Base):
     ano_lancamento = Column(Integer)
     produtora = Column(String,nullable=False)
 
-    episodios = relationship("Episodio", back_populates = "serie" , cascade = "all, delete-orpan")
+    episodios = relationship("Episodio", back_populates = "serie" , cascade = "all, delete-orphan")
 
-class Episodio(Base):
-    __tablename__ = 'episodios'
-    
-    id = Column(Integer, primary_key=True)
-    titulo = Column(String, nullable=False)
+class Episodios(Base):
+    __tablename__ = "episodios"
+    id = Column(Integer , primary_key = True)
+    titulo = Column(String , nullable = False)
     numero = Column(Integer)
-    duracao_minutos = Column(float)
-    erie_id = Column(Integer, ForeignKey('series.id'))
-    
-    serie = relationship("Serie", back_populates="episodios")  
+    duracao_minutos = Column(Float)
+    serie_id =  Column(Integer , ForeignKey ('serie.id'))
 
+    serie = relationship("Serie", back_populates= "episodios")
 
 
